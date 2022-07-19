@@ -50,3 +50,5 @@ router.delete('/notes/:id', (req, res) => {
     })
     return res.json(notes);
 });
+
+module.exports = router;
