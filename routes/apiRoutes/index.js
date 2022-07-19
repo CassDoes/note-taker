@@ -28,3 +28,25 @@ router.post('/notes', (req, res) => {
       })
       return res.json(newNote);
 })
+
+
+// Delete request to remove saved note
+router.delete('/notes/:id', (req, res) => {
+    const noteId = req.params.id;
+
+    // loop through saved notes and delete note with the same id
+    for (let i = 0; i < notes.length; i++) {
+        if (notes[i].id === noteId) {
+            notes.splice(i, 1);
+        }
+    };
+
+    fs.writeFile('db/db.json', JSON.stringify(notes), err => {
+        if (err) {
+            return console.log(err);
+        }
+        console.log('Note Deleted!')
+        
+    })
+    return res.json(notes);
+});
